@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
-class ForecastIndiactorWidget extends StatelessWidget {
-  const ForecastIndiactorWidget({
+class ForecastIndicatorWidget extends StatelessWidget {
+  const ForecastIndicatorWidget({
     required this.forecastIndicatorName,
     required this.forecastIndicatorValue,
     Key? key,

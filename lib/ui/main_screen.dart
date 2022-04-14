@@ -99,7 +99,7 @@ class MainScreen extends StatelessWidget {
               const SizedBox(
                 height: 31,
               ),
-              const _ForeCastIndiactors(),
+              const _ForeCastIndicators(),
             ],
           ),
         ),
@@ -108,8 +108,8 @@ class MainScreen extends StatelessWidget {
   }
 }
 
-class _ForeCastIndiactors extends StatelessWidget {
-  const _ForeCastIndiactors({Key? key}) : super(key: key);
+class _ForeCastIndicators extends StatelessWidget {
+  const _ForeCastIndicators({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -118,11 +118,11 @@ class _ForeCastIndiactors extends StatelessWidget {
         Row(
           mainAxisAlignment: MainAxisAlignment.spaceAround,
           children: const [
-            ForecastIndiactorWidget(
+            ForecastIndicatorWidget(
               forecastIndicatorName: "Скорость ветра",
               forecastIndicatorValue: "7 м/c",
             ),
-            ForecastIndiactorWidget(
+            ForecastIndicatorWidget(
               forecastIndicatorName: "Видимость",
               forecastIndicatorValue: "6.4 метра",
             ),
@@ -134,11 +134,11 @@ class _ForeCastIndiactors extends StatelessWidget {
         Row(
           mainAxisAlignment: MainAxisAlignment.spaceAround,
           children: const [
-            ForecastIndiactorWidget(
+            ForecastIndicatorWidget(
               forecastIndicatorName: "Влажность",
               forecastIndicatorValue: "85%",
             ),
-            ForecastIndiactorWidget(
+            ForecastIndicatorWidget(
               forecastIndicatorName: "Давление",
               forecastIndicatorValue: "998 мбар",
             ),
