@@ -17,6 +17,7 @@ dependencies:
   flutter_mobx: ^2.0.4
   geolocator: ^8.2.0
   connectivity_plus: ^2.3.0
+  sliding_up_panel: ^2.0.0+1
 
 dev_dependencies:
   flutter_test:
