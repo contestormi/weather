@@ -21,12 +21,15 @@ class MainScreen extends StatelessWidget {
         panel: const PanelWidget(),
         body: Container(
           padding: const EdgeInsets.only(top: 25),
-          decoration: const BoxDecoration(
+          decoration: BoxDecoration(
             gradient: LinearGradient(
-                colors: AppTheme.linearGradientColors,
-                begin: Alignment.topCenter,
-                end: Alignment.topCenter,
-                stops: [0.5, 0.1, 0.4]),
+              colors: [
+                AppColors.blue,
+                AppColors.black,
+              ],
+              begin: Alignment.topCenter,
+              end: Alignment.bottomCenter,
+            ),
           ),
           child: Column(
             children: [

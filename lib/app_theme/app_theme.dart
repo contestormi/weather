@@ -1,15 +1,6 @@
 import 'package:flutter/material.dart';
 
-class AppTheme {
-  // static const colors = [
-  //   Color.fromRGBO(48, 162, 197, 1),
-  //   Color.fromRGBO(255, 255, 255, 0),
-  // ];
-  static const List<Color> linearGradientColors = [
-    Color.fromRGBO(48, 162, 197, 1),
-    Color.fromRGBO(255, 255, 255, 0),
-    Color.fromRGBO(0, 36, 47, 1),
-  ];
-
-  AppTheme._();
+abstract class AppColors {
+  static Color blue = const Color(0xff30A2C5);
+  static Color black = const Color(0xff00242F);
 }
