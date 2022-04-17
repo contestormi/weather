@@ -16,6 +16,7 @@ dependencies:
   flutter_mobx: ^2.0.4
   geolocator: ^8.2.0
   http: ^0.13.4
+  intl: ^0.17.0
   json_annotation: ^4.4.0
   json_serializable: ^6.1.5
   mobx: ^2.0.6+1
