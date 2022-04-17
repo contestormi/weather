@@ -7,21 +7,20 @@ part 'weather_store.g.dart';
 class WeatherStore = _WeatherStoreBase with _$WeatherStore;
 
 abstract class _WeatherStoreBase with Store {
-  final OpenWeatherAPI _openWeatherAPI = OpenWeatherAPI();
+  final _openWeatherAPI = OpenWeatherAPI();
 
   @observable
-  double lat = 55.7522;
+  WeatherForecast weatherForecast = WeatherForecast();
   @observable
-  double lon = 37.6156;
+  double lat = 0;
+  @observable
+  double lon = 0;
 
   @action
-  Future<WeatherForecast> getWeatherData() async {
-    final _position = await Geolocator.getCurrentPosition(
-        desiredAccuracy: LocationAccuracy.high);
+  Future<void> getWeatherData() async {
+    final _position = await Geolocator.getCurrentPosition();
     lat = _position.latitude;
     lon = _position.longitude;
-    final weatherForecastData =
-        await _openWeatherAPI.getWeatherData(lat: lat, lon: lon);
-    return weatherForecastData;
+    weatherForecast = await _openWeatherAPI.getWeatherData(lat: lat, lon: lon);
   }
 }
