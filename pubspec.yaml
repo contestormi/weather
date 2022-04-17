@@ -18,6 +18,7 @@ dependencies:
   http: ^0.13.4
   json_annotation: ^4.4.0
   json_serializable: ^6.1.5
+  mobx: ^2.0.6+1
   sliding_up_panel: ^2.0.0+1
 
 dev_dependencies:
