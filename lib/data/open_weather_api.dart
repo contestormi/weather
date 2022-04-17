@@ -8,12 +8,15 @@ class OpenWeatherAPI {
   static const String _baseUrl =
       "https://api.openweathermap.org/data/2.5/onecall";
 
-  Future<WeatherForecast> getWeatherData(
-      {required double lat,
-      required double lon,
-      String excludePart = "minutely"}) async {
+  Future<WeatherForecast> getWeatherData({
+    required double lat,
+    required double lon,
+    String excludePart = "minutely,hourly",
+    String units = "metric",
+    String lang = "ru",
+  }) async {
     String url =
-        "$_baseUrl?lat=$lat&lon=$lon&exclude=$excludePart&appid=$_openWeatherAPIKey";
+        "$_baseUrl?lat=$lat&lon=$lon&lang=$lang&exclude=$excludePart&units=$units&appid=$_openWeatherAPIKey";
     final http.Response response;
 
     try {
