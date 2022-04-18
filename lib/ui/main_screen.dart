@@ -66,7 +66,11 @@ class MainScreen extends StatelessWidget {
                     ),
                   ),
                   Text(
-                    weatherForecast.timezone.toString().split('/').last,
+                    weatherForecast.timezone
+                        .toString()
+                        .split('/')
+                        .last
+                        .replaceAll(RegExp("[_\$]"), ' '),
                     style: const TextStyle(
                       color: Colors.white,
                       fontWeight: FontWeight.w700,
