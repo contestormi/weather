@@ -1,10 +1,13 @@
 import 'package:flutter/material.dart';
+import 'package:weather/data/models/weather_forecast_model.dart';
 
 class PanelWidget extends StatelessWidget {
   const PanelWidget({
     Key? key,
+    required this.weatherForecast,
   }) : super(key: key);
 
+  final WeatherForecast weatherForecast;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -25,31 +28,31 @@ class PanelWidget extends StatelessWidget {
             ),
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceAround,
-              children: const [
+              children: [
                 _ForecastOnTheNextDay(
                   day: "ВС",
                   icon: "assets/icons/snow.png",
-                  temperature: "10°C",
+                  temperature: "${weatherForecast.current?.temp?.round()}°C",
                 ),
                 _ForecastOnTheNextDay(
                   day: "ПН",
                   icon: "assets/icons/small_snow.png",
-                  temperature: "8°C",
+                  temperature: "${weatherForecast.current?.temp?.round()}°C",
                 ),
                 _ForecastOnTheNextDay(
                   day: "ВТ",
                   icon: "assets/icons/hail.png",
-                  temperature: "3°C",
+                  temperature: "${weatherForecast.current?.temp?.round()}°C",
                 ),
                 _ForecastOnTheNextDay(
                   day: "СР",
                   icon: "assets/icons/lightning.png",
-                  temperature: "5°C",
+                  temperature: "${weatherForecast.current?.temp?.round()}°C",
                 ),
                 _ForecastOnTheNextDay(
                   day: "ЧТ",
                   icon: "assets/icons/cloudy.png",
-                  temperature: "9°C",
+                  temperature: "${weatherForecast.current?.temp?.round()}°C",
                 ),
               ],
             )

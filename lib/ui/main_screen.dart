@@ -1,12 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:sliding_up_panel/sliding_up_panel.dart';
 import 'package:weather/app_theme/app_theme.dart';
+import 'package:weather/data/models/weather_forecast_model.dart';
 import 'package:weather/ui/widgets/custom_text_form_field_widget.dart';
 import 'package:weather/ui/widgets/forecast_indicator_widget.dart';
 import 'package:weather/ui/widgets/panel_widget.dart';
+import 'package:weather/utils/date_parse.dart';
 
 class MainScreen extends StatelessWidget {
-  const MainScreen({Key? key}) : super(key: key);
+  const MainScreen({Key? key, required this.weatherForecast}) : super(key: key);
+  final WeatherForecast weatherForecast;
 
   @override
   Widget build(BuildContext context) {
@@ -18,7 +21,9 @@ class MainScreen extends StatelessWidget {
         maxHeight: 200,
         minHeight: 60,
         backdropEnabled: true,
-        panel: const PanelWidget(),
+        panel: PanelWidget(
+          weatherForecast: weatherForecast,
+        ),
         body: Container(
           padding: const EdgeInsets.only(top: 25),
           decoration: BoxDecoration(
@@ -51,17 +56,22 @@ class MainScreen extends StatelessWidget {
                 height: 17,
               ),
               Column(
-                children: const [
+                children: [
                   Text(
-                    "Сегодня, 7 Мая, 2022",
-                    style: TextStyle(
+                    DateParseUtil.convertUnixTimeToDateTime(
+                        weatherForecast.current?.dt ?? 0),
+                    style: const TextStyle(
                       color: Colors.white,
                       fontWeight: FontWeight.w400,
                     ),
                   ),
                   Text(
-                    "Барселона",
-                    style: TextStyle(
+                    weatherForecast.timezone
+                        .toString()
+                        .split('/')
+                        .last
+                        .replaceAll(RegExp("[_\$]"), ' '),
+                    style: const TextStyle(
                       color: Colors.white,
                       fontWeight: FontWeight.w700,
                       fontSize: 40,
@@ -86,9 +96,9 @@ class MainScreen extends StatelessWidget {
                       height: 75,
                       child: Image.asset("assets/icons/small_snow.png"),
                     ),
-                    const Text(
-                      "10°C",
-                      style: TextStyle(
+                    Text(
+                      "${weatherForecast.current?.temp?.round()}°C",
+                      style: const TextStyle(
                         fontWeight: FontWeight.w300,
                         fontSize: 100,
                       ),
@@ -99,7 +109,9 @@ class MainScreen extends StatelessWidget {
               const SizedBox(
                 height: 31,
               ),
-              const _ForeCastIndicators(),
+              _ForeCastIndicators(
+                weatherForecast: weatherForecast,
+              ),
             ],
           ),
         ),
@@ -109,7 +121,9 @@ class MainScreen extends StatelessWidget {
 }
 
 class _ForeCastIndicators extends StatelessWidget {
-  const _ForeCastIndicators({Key? key}) : super(key: key);
+  const _ForeCastIndicators({Key? key, required this.weatherForecast})
+      : super(key: key);
+  final WeatherForecast weatherForecast;
 
   @override
   Widget build(BuildContext context) {
@@ -117,14 +131,16 @@ class _ForeCastIndicators extends StatelessWidget {
       children: [
         Row(
           mainAxisAlignment: MainAxisAlignment.spaceAround,
-          children: const [
+          children: [
             ForecastIndicatorWidget(
               forecastIndicatorName: "Скорость ветра",
-              forecastIndicatorValue: "7 м/c",
+              forecastIndicatorValue:
+                  "${weatherForecast.current?.windSpeed} м/c",
             ),
             ForecastIndicatorWidget(
               forecastIndicatorName: "Видимость",
-              forecastIndicatorValue: "6.4 метра",
+              forecastIndicatorValue:
+                  "${weatherForecast.current?.visibility} метра",
             ),
           ],
         ),
@@ -133,14 +149,15 @@ class _ForeCastIndicators extends StatelessWidget {
         ),
         Row(
           mainAxisAlignment: MainAxisAlignment.spaceAround,
-          children: const [
+          children: [
             ForecastIndicatorWidget(
               forecastIndicatorName: "Влажность",
-              forecastIndicatorValue: "85%",
+              forecastIndicatorValue: "${weatherForecast.current?.humidity} %",
             ),
             ForecastIndicatorWidget(
               forecastIndicatorName: "Давление",
-              forecastIndicatorValue: "998 мбар",
+              forecastIndicatorValue:
+                  "${weatherForecast.current?.pressure} мбар",
             ),
           ],
         ),
