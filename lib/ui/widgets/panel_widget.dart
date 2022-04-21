@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:weather/data/models/weather_forecast_model.dart';
+import 'package:weather/utils/date_parse.dart';
 
 class PanelWidget extends StatelessWidget {
   const PanelWidget({
@@ -30,29 +31,44 @@ class PanelWidget extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.spaceAround,
               children: [
                 _ForecastOnTheNextDay(
-                  day: "ВС",
-                  icon: "assets/icons/snow.png",
-                  temperature: "${weatherForecast.current?.temp?.round()}°C",
+                  day: DateParseUtil.convertUnixTimeToDayOfTheWeek(
+                      weatherForecast.daily?[1].dt ?? 0),
+                  icon:
+                      "http://openweathermap.org/img/wn/${weatherForecast.daily![1].weather![0].icon}@4x.png",
+                  temperature:
+                      "${weatherForecast.daily?[1].temp?.day?.round()}°C",
                 ),
                 _ForecastOnTheNextDay(
-                  day: "ПН",
-                  icon: "assets/icons/small_snow.png",
-                  temperature: "${weatherForecast.current?.temp?.round()}°C",
+                  day: DateParseUtil.convertUnixTimeToDayOfTheWeek(
+                      weatherForecast.daily?[2].dt ?? 0),
+                  icon:
+                      "http://openweathermap.org/img/wn/${weatherForecast.daily![2].weather![0].icon}@4x.png",
+                  temperature:
+                      "${weatherForecast.daily?[2].temp?.day?.round()}°C",
                 ),
                 _ForecastOnTheNextDay(
-                  day: "ВТ",
-                  icon: "assets/icons/hail.png",
-                  temperature: "${weatherForecast.current?.temp?.round()}°C",
+                  day: DateParseUtil.convertUnixTimeToDayOfTheWeek(
+                      weatherForecast.daily?[3].dt ?? 0),
+                  icon:
+                      "http://openweathermap.org/img/wn/${weatherForecast.daily![3].weather![0].icon}@4x.png",
+                  temperature:
+                      "${weatherForecast.daily?[3].temp?.day?.round()}°C",
                 ),
                 _ForecastOnTheNextDay(
-                  day: "СР",
-                  icon: "assets/icons/lightning.png",
-                  temperature: "${weatherForecast.current?.temp?.round()}°C",
+                  day: DateParseUtil.convertUnixTimeToDayOfTheWeek(
+                      weatherForecast.daily?[4].dt ?? 0),
+                  icon:
+                      "http://openweathermap.org/img/wn/${weatherForecast.daily![4].weather![0].icon}@4x.png",
+                  temperature:
+                      "${weatherForecast.daily?[4].temp?.day?.round()}°C",
                 ),
                 _ForecastOnTheNextDay(
-                  day: "ЧТ",
-                  icon: "assets/icons/cloudy.png",
-                  temperature: "${weatherForecast.current?.temp?.round()}°C",
+                  day: DateParseUtil.convertUnixTimeToDayOfTheWeek(
+                      weatherForecast.daily?[5].dt ?? 0),
+                  icon:
+                      "http://openweathermap.org/img/wn/${weatherForecast.daily![5].weather![0].icon}@4x.png",
+                  temperature:
+                      "${weatherForecast.daily?[5].temp?.day?.round()}°C",
                 ),
               ],
             )
@@ -99,7 +115,7 @@ class _ForecastOnTheNextDay extends StatelessWidget {
               SizedBox(
                 width: 30,
                 height: 30,
-                child: Image.asset(icon),
+                child: Image.network(icon),
               ),
               const SizedBox(
                 height: 2,

@@ -94,7 +94,8 @@ class MainScreen extends StatelessWidget {
                     SizedBox(
                       width: 75,
                       height: 75,
-                      child: Image.asset("assets/icons/small_snow.png"),
+                      child: Image.network(
+                          "http://openweathermap.org/img/wn/${weatherForecast.current!.weather![0].icon.toString()}@4x.png"),
                     ),
                     Text(
                       "${weatherForecast.current?.temp?.round()}°C",
