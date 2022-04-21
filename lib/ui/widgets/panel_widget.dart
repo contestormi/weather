@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:weather/data/models/weather_forecast_model.dart';
 import 'package:weather/utils/date_parse.dart';
+import 'package:weather/utils/network_Icon_String_Builder.dart';
 
 class PanelWidget extends StatelessWidget {
   const PanelWidget({
@@ -33,40 +34,40 @@ class PanelWidget extends StatelessWidget {
                 _ForecastOnTheNextDay(
                   day: DateParseUtil.convertUnixTimeToDayOfTheWeek(
                       weatherForecast.daily?[1].dt ?? 0),
-                  icon:
-                      "http://openweathermap.org/img/wn/${weatherForecast.daily![1].weather![0].icon}@4x.png",
+                  icon: NetworkIconStringBuilderUtil.networkIconStringBuilder(
+                      weatherForecast.daily![1].weather![0].icon.toString()),
                   temperature:
                       "${weatherForecast.daily?[1].temp?.day?.round()}°C",
                 ),
                 _ForecastOnTheNextDay(
                   day: DateParseUtil.convertUnixTimeToDayOfTheWeek(
                       weatherForecast.daily?[2].dt ?? 0),
-                  icon:
-                      "http://openweathermap.org/img/wn/${weatherForecast.daily![2].weather![0].icon}@4x.png",
+                  icon: NetworkIconStringBuilderUtil.networkIconStringBuilder(
+                      weatherForecast.daily![2].weather![0].icon.toString()),
                   temperature:
                       "${weatherForecast.daily?[2].temp?.day?.round()}°C",
                 ),
                 _ForecastOnTheNextDay(
                   day: DateParseUtil.convertUnixTimeToDayOfTheWeek(
                       weatherForecast.daily?[3].dt ?? 0),
-                  icon:
-                      "http://openweathermap.org/img/wn/${weatherForecast.daily![3].weather![0].icon}@4x.png",
+                  icon: NetworkIconStringBuilderUtil.networkIconStringBuilder(
+                      weatherForecast.daily![3].weather![0].icon.toString()),
                   temperature:
                       "${weatherForecast.daily?[3].temp?.day?.round()}°C",
                 ),
                 _ForecastOnTheNextDay(
                   day: DateParseUtil.convertUnixTimeToDayOfTheWeek(
                       weatherForecast.daily?[4].dt ?? 0),
-                  icon:
-                      "http://openweathermap.org/img/wn/${weatherForecast.daily![4].weather![0].icon}@4x.png",
+                  icon: NetworkIconStringBuilderUtil.networkIconStringBuilder(
+                      weatherForecast.daily![4].weather![0].icon.toString()),
                   temperature:
                       "${weatherForecast.daily?[4].temp?.day?.round()}°C",
                 ),
                 _ForecastOnTheNextDay(
                   day: DateParseUtil.convertUnixTimeToDayOfTheWeek(
                       weatherForecast.daily?[5].dt ?? 0),
-                  icon:
-                      "http://openweathermap.org/img/wn/${weatherForecast.daily![5].weather![0].icon}@4x.png",
+                  icon: NetworkIconStringBuilderUtil.networkIconStringBuilder(
+                      weatherForecast.daily![5].weather![0].icon.toString()),
                   temperature:
                       "${weatherForecast.daily?[5].temp?.day?.round()}°C",
                 ),
