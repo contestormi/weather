@@ -1,7 +1,10 @@
 import 'package:flutter/material.dart';
 
 class CustomTextFormFieldWidget extends StatefulWidget {
-  const CustomTextFormFieldWidget({Key? key}) : super(key: key);
+  const CustomTextFormFieldWidget({Key? key, required this.controller})
+      : super(key: key);
+
+  final TextEditingController controller;
 
   @override
   State<CustomTextFormFieldWidget> createState() =>
@@ -12,6 +15,7 @@ class _CustomTextFormFieldWidgetState extends State<CustomTextFormFieldWidget> {
   @override
   Widget build(BuildContext context) {
     return TextFormField(
+      controller: widget.controller,
       decoration: InputDecoration(
         border: OutlineInputBorder(
           borderRadius: BorderRadius.circular(50.0),

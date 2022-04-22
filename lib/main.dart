@@ -1,6 +1,5 @@
 import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:flutter/material.dart';
-import 'package:weather/data/models/weather_forecast_model.dart';
 import 'package:weather/services/geolocator_service.dart';
 import 'package:weather/stores/weather_store.dart';
 import 'package:weather/ui/main_screen.dart';
@@ -10,14 +9,17 @@ void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await GeolocatorService().checkPermissionAndGetGeoLocation();
   await weatherStore.getWeatherData();
-  runApp(MyApp(
-    weatherForecast: weatherStore.weatherForecast,
-  ));
+  runApp(MyApp(weatherStore: weatherStore));
 }
 
 class MyApp extends StatelessWidget {
-  const MyApp({Key? key, required this.weatherForecast}) : super(key: key);
-  final WeatherForecast weatherForecast;
+  const MyApp({
+    Key? key,
+    required this.weatherStore,
+  }) : super(key: key);
+
+  final WeatherStore weatherStore;
+
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -32,9 +34,7 @@ class MyApp extends StatelessWidget {
         builder: (_, connection) {
           if (connection.data == ConnectivityResult.wifi ||
               connection.data == ConnectivityResult.mobile) {
-            return MainScreen(
-              weatherForecast: weatherForecast,
-            );
+            return MainScreen(weatherStore: weatherStore);
           } else {
             return const Center(
               child: Text('Заглушка'),

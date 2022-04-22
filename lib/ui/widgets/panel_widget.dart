@@ -1,15 +1,15 @@
 import 'package:flutter/material.dart';
-import 'package:weather/data/models/weather_forecast_model.dart';
+import 'package:weather/stores/weather_store.dart';
 import 'package:weather/utils/date_parse.dart';
 import 'package:weather/utils/icon_string_builder.dart';
 
 class PanelWidget extends StatelessWidget {
   const PanelWidget({
     Key? key,
-    required this.weatherForecast,
+    required this.weatherStore,
   }) : super(key: key);
 
-  final WeatherForecast weatherForecast;
+  final WeatherStore weatherStore;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -33,43 +33,33 @@ class PanelWidget extends StatelessWidget {
               children: [
                 _ForecastOnTheNextDay(
                   day: DateParseUtil.convertUnixTimeToDayOfTheWeek(
-                      weatherForecast.daily?[1].dt ?? 0),
-                  icon: IconStringBuilder.network(
-                      weatherForecast.daily![1].weather![0].icon.toString()),
-                  temperature:
-                      "${weatherForecast.daily?[1].temp?.day?.round()}°C",
+                      weatherStore.firstDayDate),
+                  icon: IconStringBuilder.network(weatherStore.firstDayIcon),
+                  temperature: "${weatherStore.firstDayTemp}°C",
                 ),
                 _ForecastOnTheNextDay(
                   day: DateParseUtil.convertUnixTimeToDayOfTheWeek(
-                      weatherForecast.daily?[2].dt ?? 0),
-                  icon: IconStringBuilder.network(
-                      weatherForecast.daily![2].weather![0].icon.toString()),
-                  temperature:
-                      "${weatherForecast.daily?[2].temp?.day?.round()}°C",
+                      weatherStore.secondDayDate),
+                  icon: IconStringBuilder.network(weatherStore.secondDayIcon),
+                  temperature: "${weatherStore.secondDayTemp}°C",
                 ),
                 _ForecastOnTheNextDay(
                   day: DateParseUtil.convertUnixTimeToDayOfTheWeek(
-                      weatherForecast.daily?[3].dt ?? 0),
-                  icon: IconStringBuilder.network(
-                      weatherForecast.daily![3].weather![0].icon.toString()),
-                  temperature:
-                      "${weatherForecast.daily?[3].temp?.day?.round()}°C",
+                      weatherStore.thirdDayDate),
+                  icon: IconStringBuilder.network(weatherStore.thirdDayIcon),
+                  temperature: "${weatherStore.thirdDayTemp}°C",
                 ),
                 _ForecastOnTheNextDay(
                   day: DateParseUtil.convertUnixTimeToDayOfTheWeek(
-                      weatherForecast.daily?[4].dt ?? 0),
-                  icon: IconStringBuilder.network(
-                      weatherForecast.daily![4].weather![0].icon.toString()),
-                  temperature:
-                      "${weatherForecast.daily?[4].temp?.day?.round()}°C",
+                      weatherStore.fourthDayDate),
+                  icon: IconStringBuilder.network(weatherStore.fourthDayIcon),
+                  temperature: "${weatherStore.fourthDayTemp}°C",
                 ),
                 _ForecastOnTheNextDay(
                   day: DateParseUtil.convertUnixTimeToDayOfTheWeek(
-                      weatherForecast.daily?[5].dt ?? 0),
-                  icon: IconStringBuilder.network(
-                      weatherForecast.daily![5].weather![0].icon.toString()),
-                  temperature:
-                      "${weatherForecast.daily?[5].temp?.day?.round()}°C",
+                      weatherStore.fifthDayDate),
+                  icon: IconStringBuilder.network(weatherStore.fifthDayIcon),
+                  temperature: "${weatherStore.fifthDayTemp}°C",
                 ),
               ],
             )
