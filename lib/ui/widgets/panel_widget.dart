@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:weather/data/models/weather_forecast_model.dart';
 import 'package:weather/utils/date_parse.dart';
-import 'package:weather/utils/network_Icon_String_Builder.dart';
+import 'package:weather/utils/icon_string_builder.dart';
 
 class PanelWidget extends StatelessWidget {
   const PanelWidget({
@@ -34,7 +34,7 @@ class PanelWidget extends StatelessWidget {
                 _ForecastOnTheNextDay(
                   day: DateParseUtil.convertUnixTimeToDayOfTheWeek(
                       weatherForecast.daily?[1].dt ?? 0),
-                  icon: NetworkIconStringBuilderUtil.networkIconStringBuilder(
+                  icon: IconStringBuilder.network(
                       weatherForecast.daily![1].weather![0].icon.toString()),
                   temperature:
                       "${weatherForecast.daily?[1].temp?.day?.round()}°C",
@@ -42,7 +42,7 @@ class PanelWidget extends StatelessWidget {
                 _ForecastOnTheNextDay(
                   day: DateParseUtil.convertUnixTimeToDayOfTheWeek(
                       weatherForecast.daily?[2].dt ?? 0),
-                  icon: NetworkIconStringBuilderUtil.networkIconStringBuilder(
+                  icon: IconStringBuilder.network(
                       weatherForecast.daily![2].weather![0].icon.toString()),
                   temperature:
                       "${weatherForecast.daily?[2].temp?.day?.round()}°C",
@@ -50,7 +50,7 @@ class PanelWidget extends StatelessWidget {
                 _ForecastOnTheNextDay(
                   day: DateParseUtil.convertUnixTimeToDayOfTheWeek(
                       weatherForecast.daily?[3].dt ?? 0),
-                  icon: NetworkIconStringBuilderUtil.networkIconStringBuilder(
+                  icon: IconStringBuilder.network(
                       weatherForecast.daily![3].weather![0].icon.toString()),
                   temperature:
                       "${weatherForecast.daily?[3].temp?.day?.round()}°C",
@@ -58,7 +58,7 @@ class PanelWidget extends StatelessWidget {
                 _ForecastOnTheNextDay(
                   day: DateParseUtil.convertUnixTimeToDayOfTheWeek(
                       weatherForecast.daily?[4].dt ?? 0),
-                  icon: NetworkIconStringBuilderUtil.networkIconStringBuilder(
+                  icon: IconStringBuilder.network(
                       weatherForecast.daily![4].weather![0].icon.toString()),
                   temperature:
                       "${weatherForecast.daily?[4].temp?.day?.round()}°C",
@@ -66,7 +66,7 @@ class PanelWidget extends StatelessWidget {
                 _ForecastOnTheNextDay(
                   day: DateParseUtil.convertUnixTimeToDayOfTheWeek(
                       weatherForecast.daily?[5].dt ?? 0),
-                  icon: NetworkIconStringBuilderUtil.networkIconStringBuilder(
+                  icon: IconStringBuilder.network(
                       weatherForecast.daily![5].weather![0].icon.toString()),
                   temperature:
                       "${weatherForecast.daily?[5].temp?.day?.round()}°C",

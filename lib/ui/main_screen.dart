@@ -6,7 +6,7 @@ import 'package:weather/ui/widgets/custom_text_form_field_widget.dart';
 import 'package:weather/ui/widgets/forecast_indicator_widget.dart';
 import 'package:weather/ui/widgets/panel_widget.dart';
 import 'package:weather/utils/date_parse.dart';
-import 'package:weather/utils/network_Icon_String_Builder.dart';
+import 'package:weather/utils/icon_string_builder.dart';
 
 class MainScreen extends StatelessWidget {
   const MainScreen({Key? key, required this.weatherForecast}) : super(key: key);
@@ -96,9 +96,9 @@ class MainScreen extends StatelessWidget {
                       width: 75,
                       height: 75,
                       child: Image.network(
-                        NetworkIconStringBuilderUtil.networkIconStringBuilder(
-                            weatherForecast.current!.weather![0].icon
-                                .toString()),
+                        IconStringBuilder.network(weatherForecast
+                            .current!.weather![0].icon
+                            .toString()),
                       ),
                     ),
                     Text(
