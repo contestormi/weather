@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:sliding_up_panel/sliding_up_panel.dart';
 import 'package:weather/app_theme/app_theme.dart';
+import 'package:weather/services/weather_service.dart';
 import 'package:weather/stores/weather_store.dart';
 import 'package:weather/ui/widgets/custom_text_form_field_widget.dart';
 import 'package:weather/ui/widgets/forecast_indicator_widget.dart';
@@ -13,10 +14,12 @@ class MainScreen extends StatelessWidget {
   MainScreen({
     Key? key,
     required this.weatherStore,
+    required this.weatherService,
   }) : super(key: key);
 
   final TextEditingController textEditingController = TextEditingController();
   final WeatherStore weatherStore;
+  final WeatherService weatherService;
 
   @override
   Widget build(BuildContext context) {
@@ -60,7 +63,7 @@ class MainScreen extends StatelessWidget {
                               bottom: 10,
                               child: IconButton(
                                   onPressed: () =>
-                                      weatherStore.getCityWeatherData(
+                                      weatherService.getCityWeatherData(
                                           textEditingController.text.trim()),
                                   icon: const Icon(Icons.search)),
                             ),

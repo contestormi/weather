@@ -1,25 +1,15 @@
-import 'package:geolocator/geolocator.dart';
 import 'package:mobx/mobx.dart';
 import 'package:weather/data/models/weather_forecast_model.dart';
-import 'package:weather/data/open_weather_api.dart';
 part 'weather_store.g.dart';
 
 class WeatherStore = _WeatherStoreBase with _$WeatherStore;
 
 abstract class _WeatherStoreBase with Store {
-  final _openWeatherAPI = OpenWeatherAPI();
-
   @observable
   int date = 0;
 
   @observable
   String timezone = '';
-
-  @observable
-  double lat = 0;
-
-  @observable
-  double lon = 0;
 
   @observable
   String icon = '';
@@ -84,27 +74,8 @@ abstract class _WeatherStoreBase with Store {
   @observable
   int fifthDayTemp = 0;
 
-  @observable
   @action
-  Future<void> getWeatherData() async {
-    final _position = await Geolocator.getCurrentPosition();
-    lat = _position.latitude;
-    lon = _position.longitude;
-    final weatherForecast =
-        await _openWeatherAPI.getWeatherData(lat: lat, lon: lon);
-    _setUpFields(weatherForecast);
-  }
-
-  @action
-  Future<void> getCityWeatherData(String cityName) async {
-    final city = (await _openWeatherAPI.getCityCords(cityName))[0];
-    final weatherForecast =
-        await _openWeatherAPI.getWeatherData(lat: city.lat!, lon: city.lon!);
-    _setUpFields(weatherForecast);
-  }
-
-  @action
-  void _setUpFields(WeatherForecast weatherForecast) {
+  void setUpWeatherFields(WeatherForecast weatherForecast) {
     date = weatherForecast.current!.dt!;
     timezone = weatherForecast.timezone!;
     icon = weatherForecast.current!.weather![0].icon.toString();

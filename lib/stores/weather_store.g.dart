@@ -9,7 +9,8 @@ part of 'weather_store.dart';
 // ignore_for_file: non_constant_identifier_names, unnecessary_brace_in_string_interps, unnecessary_lambdas, prefer_expression_function_bodies, lines_longer_than_80_chars, avoid_as, avoid_annotating_with_dynamic
 
 mixin _$WeatherStore on _WeatherStoreBase, Store {
-  final _$dateAtom = Atom(name: '_WeatherStoreBase.date');
+  late final _$dateAtom =
+      Atom(name: '_WeatherStoreBase.date', context: context);
 
   @override
   int get date {
@@ -24,7 +25,8 @@ mixin _$WeatherStore on _WeatherStoreBase, Store {
     });
   }
 
-  final _$timezoneAtom = Atom(name: '_WeatherStoreBase.timezone');
+  late final _$timezoneAtom =
+      Atom(name: '_WeatherStoreBase.timezone', context: context);
 
   @override
   String get timezone {
@@ -39,37 +41,8 @@ mixin _$WeatherStore on _WeatherStoreBase, Store {
     });
   }
 
-  final _$latAtom = Atom(name: '_WeatherStoreBase.lat');
-
-  @override
-  double get lat {
-    _$latAtom.reportRead();
-    return super.lat;
-  }
-
-  @override
-  set lat(double value) {
-    _$latAtom.reportWrite(value, super.lat, () {
-      super.lat = value;
-    });
-  }
-
-  final _$lonAtom = Atom(name: '_WeatherStoreBase.lon');
-
-  @override
-  double get lon {
-    _$lonAtom.reportRead();
-    return super.lon;
-  }
-
-  @override
-  set lon(double value) {
-    _$lonAtom.reportWrite(value, super.lon, () {
-      super.lon = value;
-    });
-  }
-
-  final _$iconAtom = Atom(name: '_WeatherStoreBase.icon');
+  late final _$iconAtom =
+      Atom(name: '_WeatherStoreBase.icon', context: context);
 
   @override
   String get icon {
@@ -84,7 +57,8 @@ mixin _$WeatherStore on _WeatherStoreBase, Store {
     });
   }
 
-  final _$tempAtom = Atom(name: '_WeatherStoreBase.temp');
+  late final _$tempAtom =
+      Atom(name: '_WeatherStoreBase.temp', context: context);
 
   @override
   int get temp {
@@ -99,7 +73,8 @@ mixin _$WeatherStore on _WeatherStoreBase, Store {
     });
   }
 
-  final _$windSpeedAtom = Atom(name: '_WeatherStoreBase.windSpeed');
+  late final _$windSpeedAtom =
+      Atom(name: '_WeatherStoreBase.windSpeed', context: context);
 
   @override
   double get windSpeed {
@@ -114,7 +89,8 @@ mixin _$WeatherStore on _WeatherStoreBase, Store {
     });
   }
 
-  final _$visibilityAtom = Atom(name: '_WeatherStoreBase.visibility');
+  late final _$visibilityAtom =
+      Atom(name: '_WeatherStoreBase.visibility', context: context);
 
   @override
   int get visibility {
@@ -129,7 +105,8 @@ mixin _$WeatherStore on _WeatherStoreBase, Store {
     });
   }
 
-  final _$humidityAtom = Atom(name: '_WeatherStoreBase.humidity');
+  late final _$humidityAtom =
+      Atom(name: '_WeatherStoreBase.humidity', context: context);
 
   @override
   int get humidity {
@@ -144,7 +121,8 @@ mixin _$WeatherStore on _WeatherStoreBase, Store {
     });
   }
 
-  final _$pressureAtom = Atom(name: '_WeatherStoreBase.pressure');
+  late final _$pressureAtom =
+      Atom(name: '_WeatherStoreBase.pressure', context: context);
 
   @override
   int get pressure {
@@ -159,7 +137,8 @@ mixin _$WeatherStore on _WeatherStoreBase, Store {
     });
   }
 
-  final _$firstDayDateAtom = Atom(name: '_WeatherStoreBase.firstDayDate');
+  late final _$firstDayDateAtom =
+      Atom(name: '_WeatherStoreBase.firstDayDate', context: context);
 
   @override
   int get firstDayDate {
@@ -174,7 +153,8 @@ mixin _$WeatherStore on _WeatherStoreBase, Store {
     });
   }
 
-  final _$firstDayIconAtom = Atom(name: '_WeatherStoreBase.firstDayIcon');
+  late final _$firstDayIconAtom =
+      Atom(name: '_WeatherStoreBase.firstDayIcon', context: context);
 
   @override
   String get firstDayIcon {
@@ -189,7 +169,8 @@ mixin _$WeatherStore on _WeatherStoreBase, Store {
     });
   }
 
-  final _$firstDayTempAtom = Atom(name: '_WeatherStoreBase.firstDayTemp');
+  late final _$firstDayTempAtom =
+      Atom(name: '_WeatherStoreBase.firstDayTemp', context: context);
 
   @override
   int get firstDayTemp {
@@ -204,7 +185,8 @@ mixin _$WeatherStore on _WeatherStoreBase, Store {
     });
   }
 
-  final _$secondDayDateAtom = Atom(name: '_WeatherStoreBase.secondDayDate');
+  late final _$secondDayDateAtom =
+      Atom(name: '_WeatherStoreBase.secondDayDate', context: context);
 
   @override
   int get secondDayDate {
@@ -219,7 +201,8 @@ mixin _$WeatherStore on _WeatherStoreBase, Store {
     });
   }
 
-  final _$secondDayIconAtom = Atom(name: '_WeatherStoreBase.secondDayIcon');
+  late final _$secondDayIconAtom =
+      Atom(name: '_WeatherStoreBase.secondDayIcon', context: context);
 
   @override
   String get secondDayIcon {
@@ -234,7 +217,8 @@ mixin _$WeatherStore on _WeatherStoreBase, Store {
     });
   }
 
-  final _$secondDayTempAtom = Atom(name: '_WeatherStoreBase.secondDayTemp');
+  late final _$secondDayTempAtom =
+      Atom(name: '_WeatherStoreBase.secondDayTemp', context: context);
 
   @override
   int get secondDayTemp {
@@ -249,7 +233,8 @@ mixin _$WeatherStore on _WeatherStoreBase, Store {
     });
   }
 
-  final _$thirdDayDateAtom = Atom(name: '_WeatherStoreBase.thirdDayDate');
+  late final _$thirdDayDateAtom =
+      Atom(name: '_WeatherStoreBase.thirdDayDate', context: context);
 
   @override
   int get thirdDayDate {
@@ -264,7 +249,8 @@ mixin _$WeatherStore on _WeatherStoreBase, Store {
     });
   }
 
-  final _$thirdDayIconAtom = Atom(name: '_WeatherStoreBase.thirdDayIcon');
+  late final _$thirdDayIconAtom =
+      Atom(name: '_WeatherStoreBase.thirdDayIcon', context: context);
 
   @override
   String get thirdDayIcon {
@@ -279,7 +265,8 @@ mixin _$WeatherStore on _WeatherStoreBase, Store {
     });
   }
 
-  final _$thirdDayTempAtom = Atom(name: '_WeatherStoreBase.thirdDayTemp');
+  late final _$thirdDayTempAtom =
+      Atom(name: '_WeatherStoreBase.thirdDayTemp', context: context);
 
   @override
   int get thirdDayTemp {
@@ -294,7 +281,8 @@ mixin _$WeatherStore on _WeatherStoreBase, Store {
     });
   }
 
-  final _$fourthDayDateAtom = Atom(name: '_WeatherStoreBase.fourthDayDate');
+  late final _$fourthDayDateAtom =
+      Atom(name: '_WeatherStoreBase.fourthDayDate', context: context);
 
   @override
   int get fourthDayDate {
@@ -309,7 +297,8 @@ mixin _$WeatherStore on _WeatherStoreBase, Store {
     });
   }
 
-  final _$fourthDayIconAtom = Atom(name: '_WeatherStoreBase.fourthDayIcon');
+  late final _$fourthDayIconAtom =
+      Atom(name: '_WeatherStoreBase.fourthDayIcon', context: context);
 
   @override
   String get fourthDayIcon {
@@ -324,7 +313,8 @@ mixin _$WeatherStore on _WeatherStoreBase, Store {
     });
   }
 
-  final _$fourthDayTempAtom = Atom(name: '_WeatherStoreBase.fourthDayTemp');
+  late final _$fourthDayTempAtom =
+      Atom(name: '_WeatherStoreBase.fourthDayTemp', context: context);
 
   @override
   int get fourthDayTemp {
@@ -339,7 +329,8 @@ mixin _$WeatherStore on _WeatherStoreBase, Store {
     });
   }
 
-  final _$fifthDayDateAtom = Atom(name: '_WeatherStoreBase.fifthDayDate');
+  late final _$fifthDayDateAtom =
+      Atom(name: '_WeatherStoreBase.fifthDayDate', context: context);
 
   @override
   int get fifthDayDate {
@@ -354,7 +345,8 @@ mixin _$WeatherStore on _WeatherStoreBase, Store {
     });
   }
 
-  final _$fifthDayIconAtom = Atom(name: '_WeatherStoreBase.fifthDayIcon');
+  late final _$fifthDayIconAtom =
+      Atom(name: '_WeatherStoreBase.fifthDayIcon', context: context);
 
   @override
   String get fifthDayIcon {
@@ -369,7 +361,8 @@ mixin _$WeatherStore on _WeatherStoreBase, Store {
     });
   }
 
-  final _$fifthDayTempAtom = Atom(name: '_WeatherStoreBase.fifthDayTemp');
+  late final _$fifthDayTempAtom =
+      Atom(name: '_WeatherStoreBase.fifthDayTemp', context: context);
 
   @override
   int get fifthDayTemp {
@@ -384,33 +377,15 @@ mixin _$WeatherStore on _WeatherStoreBase, Store {
     });
   }
 
-  final _$getWeatherDataAsyncAction =
-      AsyncAction('_WeatherStoreBase.getWeatherData');
+  late final _$_WeatherStoreBaseActionController =
+      ActionController(name: '_WeatherStoreBase', context: context);
 
   @override
-  ObservableFuture<void> getWeatherData() {
-    return ObservableFuture<void>(
-        _$getWeatherDataAsyncAction.run(() => super.getWeatherData()));
-  }
-
-  final _$getCityWeatherDataAsyncAction =
-      AsyncAction('_WeatherStoreBase.getCityWeatherData');
-
-  @override
-  Future<void> getCityWeatherData(String cityName) {
-    return _$getCityWeatherDataAsyncAction
-        .run(() => super.getCityWeatherData(cityName));
-  }
-
-  final _$_WeatherStoreBaseActionController =
-      ActionController(name: '_WeatherStoreBase');
-
-  @override
-  void _setUpFields(WeatherForecast weatherForecast) {
+  void setUpWeatherFields(WeatherForecast weatherForecast) {
     final _$actionInfo = _$_WeatherStoreBaseActionController.startAction(
-        name: '_WeatherStoreBase._setUpFields');
+        name: '_WeatherStoreBase.setUpWeatherFields');
     try {
-      return super._setUpFields(weatherForecast);
+      return super.setUpWeatherFields(weatherForecast);
     } finally {
       _$_WeatherStoreBaseActionController.endAction(_$actionInfo);
     }
@@ -421,8 +396,6 @@ mixin _$WeatherStore on _WeatherStoreBase, Store {
     return '''
 date: ${date},
 timezone: ${timezone},
-lat: ${lat},
-lon: ${lon},
 icon: ${icon},
 temp: ${temp},
 windSpeed: ${windSpeed},
