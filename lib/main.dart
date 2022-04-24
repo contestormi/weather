@@ -8,6 +8,7 @@ import 'package:weather/stores/weather_store.dart';
 import 'package:weather/ui/main_screen.dart';
 
 void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
   WeatherStore _weatherStore = WeatherStore();
   OpenWeatherAPI _openWeatherAPI = OpenWeatherAPI();
   WeatherService _weatherService = WeatherService(

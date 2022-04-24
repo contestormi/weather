@@ -13,13 +13,13 @@ dependencies:
   cupertino_icons: ^1.0.2
   flutter:
     sdk: flutter
-  flutter_mobx: ^2.0.4
+  flutter_mobx: ^2.0.5
   geolocator: ^8.2.0
   http: ^0.13.4
   intl: ^0.17.0
   json_annotation: ^4.4.0
   json_serializable: ^6.1.5
-  mobx: ^2.0.6+1
+  mobx: ^2.0.7
   sliding_up_panel: ^2.0.0+1
 
 dev_dependencies:
@@ -29,6 +29,7 @@ dev_dependencies:
   flutter_test:
     sdk: flutter
   mobx_codegen: ^2.0.5+2
+  mocktail: ^0.3.0
 
 flutter:
   uses-material-design: true
