@@ -10,16 +10,23 @@ import 'package:weather/ui/widgets/panel_widget.dart';
 import 'package:weather/utils/date_parse.dart';
 import 'package:weather/utils/icon_string_builder.dart';
 
-class MainScreen extends StatelessWidget {
-  MainScreen({
+class MainScreen extends StatefulWidget {
+  const MainScreen({
     Key? key,
     required this.weatherStore,
     required this.weatherService,
   }) : super(key: key);
 
-  final TextEditingController textEditingController = TextEditingController();
   final WeatherStore weatherStore;
   final WeatherService weatherService;
+
+  @override
+  State<MainScreen> createState() => _MainScreenState();
+}
+
+class _MainScreenState extends State<MainScreen> {
+  final _textEditingController = TextEditingController();
+  final _focusNode = FocusNode();
 
   @override
   Widget build(BuildContext context) {
@@ -33,7 +40,7 @@ class MainScreen extends StatelessWidget {
                 minHeight: 60,
                 backdropEnabled: true,
                 panel: PanelWidget(
-                  weatherStore: weatherStore,
+                  weatherStore: widget.weatherStore,
                 ),
                 body: Container(
                   padding: const EdgeInsets.only(top: 25),
@@ -52,22 +59,18 @@ class MainScreen extends StatelessWidget {
                       Padding(
                         padding:
                             const EdgeInsets.only(right: 15, left: 15, top: 25),
-                        child: Stack(
-                          children: [
-                            CustomTextFormFieldWidget(
-                              controller: textEditingController,
-                            ),
-                            Positioned(
-                              right: 27,
-                              top: 10,
-                              bottom: 10,
-                              child: IconButton(
-                                  onPressed: () =>
-                                      weatherService.getCityWeatherData(
-                                          textEditingController.text.trim()),
-                                  icon: const Icon(Icons.search)),
-                            ),
-                          ],
+                        child: CustomTextFormFieldWidget(
+                          textEditingcontroller: _textEditingController,
+                          valueListenable: _textEditingController,
+                          weatherStore: widget.weatherStore,
+                          focusNode: _focusNode,
+                          suffixIcon: IconButton(
+                              onPressed: () {
+                                widget.weatherService.getCityWeatherData(
+                                    _textEditingController.text.trim());
+                                FocusScope.of(context).unfocus();
+                              },
+                              icon: const Icon(Icons.search)),
                         ),
                       ),
                       const SizedBox(
@@ -77,14 +80,14 @@ class MainScreen extends StatelessWidget {
                         children: [
                           Text(
                             DateParseUtil.convertUnixTimeToDateTime(
-                                weatherStore.date),
+                                widget.weatherStore.date),
                             style: const TextStyle(
                               color: Colors.white,
                               fontWeight: FontWeight.w400,
                             ),
                           ),
                           Text(
-                            weatherStore.timezone
+                            widget.weatherStore.timezone
                                 .toString()
                                 .split('/')
                                 .last
@@ -113,11 +116,12 @@ class MainScreen extends StatelessWidget {
                               width: 75,
                               height: 75,
                               child: Image.network(
-                                IconStringBuilder.network(weatherStore.icon),
+                                IconStringBuilder.network(
+                                    widget.weatherStore.icon),
                               ),
                             ),
                             Text(
-                              "${weatherStore.temp}°C",
+                              "${widget.weatherStore.temp}°C",
                               style: const TextStyle(
                                 fontWeight: FontWeight.w300,
                                 fontSize: 100,
@@ -130,13 +134,19 @@ class MainScreen extends StatelessWidget {
                         height: 31,
                       ),
                       _ForeCastIndicators(
-                        weatherStore: weatherStore,
+                        weatherStore: widget.weatherStore,
                       ),
                     ],
                   ),
                 ),
               ),
             ));
+  }
+
+  @override
+  void dispose() {
+    _textEditingController.dispose();
+    super.dispose();
   }
 }
 
