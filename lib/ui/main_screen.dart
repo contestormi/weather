@@ -60,7 +60,7 @@ class _MainScreenState extends State<MainScreen> {
                         padding:
                             const EdgeInsets.only(right: 15, left: 15, top: 25),
                         child: CustomTextFormFieldWidget(
-                          textEditingcontroller: _textEditingController,
+                          textEditingController: _textEditingController,
                           valueListenable: _textEditingController,
                           weatherStore: widget.weatherStore,
                           focusNode: _focusNode,
@@ -80,7 +80,8 @@ class _MainScreenState extends State<MainScreen> {
                         children: [
                           Text(
                             DateParseUtil.convertUnixTimeToDateTime(
-                                widget.weatherStore.date),
+                                    widget.weatherStore.date)
+                                .toString(),
                             style: const TextStyle(
                               color: Colors.white,
                               fontWeight: FontWeight.w400,
@@ -163,12 +164,12 @@ class _ForeCastIndicators extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.spaceAround,
           children: [
             ForecastIndicatorWidget(
-              forecastIndicatorName: "Скорость ветра",
-              forecastIndicatorValue: "${weatherStore.windSpeed} м/c",
+              forecastIndicatorName: "Wind speed",
+              forecastIndicatorValue: "${weatherStore.windSpeed} m/s",
             ),
             ForecastIndicatorWidget(
-              forecastIndicatorName: "Видимость",
-              forecastIndicatorValue: "${weatherStore.visibility} метра",
+              forecastIndicatorName: "Visibility",
+              forecastIndicatorValue: "${weatherStore.visibility} meters",
             ),
           ],
         ),
@@ -179,12 +180,12 @@ class _ForeCastIndicators extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.spaceAround,
           children: [
             ForecastIndicatorWidget(
-              forecastIndicatorName: "Влажность",
+              forecastIndicatorName: "Humidity",
               forecastIndicatorValue: "${weatherStore.humidity} %",
             ),
             ForecastIndicatorWidget(
-              forecastIndicatorName: "Давление",
-              forecastIndicatorValue: "${weatherStore.pressure} мбар",
+              forecastIndicatorName: "Pressure",
+              forecastIndicatorValue: "${weatherStore.pressure} mbar",
             ),
           ],
         ),
