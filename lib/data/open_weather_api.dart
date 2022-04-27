@@ -13,7 +13,7 @@ class OpenWeatherAPI {
     required double lon,
     String excludePart = "minutely,hourly",
     String units = "metric",
-    String lang = "ru",
+    String lang = "en",
   }) async {
     String url =
         "$_baseUrl/data/2.5/onecall?lat=$lat&lon=$lon&lang=$lang&exclude=$excludePart&units=$units&appid=$_openWeatherAPIKey";

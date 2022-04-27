@@ -20,7 +20,7 @@ class PanelWidget extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             const Text(
-              'Следующие 5 дней',
+              'The next 5 days',
               style: TextStyle(
                 fontWeight: FontWeight.w700,
               ),
