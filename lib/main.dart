@@ -9,6 +9,7 @@ import 'package:weather/ui/main_screen.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
+
   WeatherStore _weatherStore = WeatherStore();
   OpenWeatherAPI _openWeatherAPI = OpenWeatherAPI();
   WeatherService _weatherService = WeatherService(
@@ -17,12 +18,20 @@ void main() async {
   await GeolocatorService().checkPermissionAndGetGeoLocation();
   final _position = await Geolocator.getCurrentPosition();
 
-  await _weatherService.getWeatherData(
-      lon: _position.longitude, lat: _position.longitude);
+  final _connectivityResult = Connectivity().onConnectivityChanged;
+
+  _connectivityResult.listen((event) async {
+    if (event == ConnectivityResult.mobile ||
+        event == ConnectivityResult.wifi) {
+      await _weatherService.getWeatherData(
+          lon: _position.longitude, lat: _position.longitude);
+    }
+  });
 
   runApp(MyApp(
     weatherStore: _weatherStore,
     weatherService: _weatherService,
+    connectivityResult: _connectivityResult,
   ));
 }
 
@@ -31,10 +40,12 @@ class MyApp extends StatelessWidget {
     Key? key,
     required this.weatherStore,
     required this.weatherService,
+    required this.connectivityResult,
   }) : super(key: key);
 
   final WeatherStore weatherStore;
   final WeatherService weatherService;
+  final Stream<ConnectivityResult> connectivityResult;
 
   @override
   Widget build(BuildContext context) {
@@ -45,22 +56,15 @@ class MyApp extends StatelessWidget {
         primarySwatch: Colors.blue,
       ),
       home: StreamBuilder(
-        initialData: ConnectivityResult.mobile,
-        stream: Connectivity().onConnectivityChanged,
-        builder: (_, connection) {
-          if (connection.data == ConnectivityResult.wifi ||
-              connection.data == ConnectivityResult.mobile) {
+          initialData: ConnectivityResult.none,
+          stream: connectivityResult,
+          builder: (_, connection) {
             return MainScreen(
               weatherStore: weatherStore,
               weatherService: weatherService,
+              connectionData: connection.data,
             );
-          } else {
-            return const Center(
-              child: Text('Заглушка'),
-            );
-          }
-        },
-      ),
+          }),
     );
   }
 }

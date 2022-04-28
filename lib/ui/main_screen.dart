@@ -15,10 +15,12 @@ class MainScreen extends StatefulWidget {
     Key? key,
     required this.weatherStore,
     required this.weatherService,
+    required this.connectionData,
   }) : super(key: key);
 
   final WeatherStore weatherStore;
   final WeatherService weatherService;
+  final Object? connectionData;
 
   @override
   State<MainScreen> createState() => _MainScreenState();
@@ -65,12 +67,14 @@ class _MainScreenState extends State<MainScreen> {
                           weatherStore: widget.weatherStore,
                           focusNode: _focusNode,
                           suffixIcon: IconButton(
-                              onPressed: () {
-                                widget.weatherService.getCityWeatherData(
-                                    _textEditingController.text.trim());
-                                FocusScope.of(context).unfocus();
-                              },
-                              icon: const Icon(Icons.search)),
+                            onPressed: () {
+                              widget.weatherService.getCityWeatherData(
+                                  _textEditingController.text.trim());
+                              FocusScope.of(context).unfocus();
+                            },
+                            icon: const Icon(Icons.search),
+                          ),
+                          connectionData: widget.connectionData,
                         ),
                       ),
                       const SizedBox(
@@ -119,6 +123,13 @@ class _MainScreenState extends State<MainScreen> {
                               child: Image.network(
                                 IconStringBuilder.network(
                                     widget.weatherStore.icon),
+                                errorBuilder: (_, __, ___) {
+                                  return Container(
+                                    height: 10,
+                                    width: 10,
+                                    color: Colors.transparent,
+                                  );
+                                },
                               ),
                             ),
                             Text(
