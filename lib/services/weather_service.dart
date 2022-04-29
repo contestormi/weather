@@ -15,6 +15,7 @@ class WeatherService {
     final weatherForecast =
         await openWeatherAPI.getWeatherData(lat: lat, lon: lon);
     weatherStore.setUpWeatherFields(weatherForecast);
+    weatherStore.isLoading = false;
   }
 
   Future<void> getCityWeatherData(String cityName) async {
