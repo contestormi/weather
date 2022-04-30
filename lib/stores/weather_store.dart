@@ -6,6 +6,9 @@ class WeatherStore = _WeatherStoreBase with _$WeatherStore;
 
 abstract class _WeatherStoreBase with Store {
   @observable
+  bool isLoading = true;
+
+  @observable
   int date = 0;
 
   @observable
