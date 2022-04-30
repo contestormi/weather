@@ -67,15 +67,7 @@ class _MainScreenState extends State<MainScreen> {
                           valueListenable: _textEditingController,
                           weatherStore: widget.weatherStore,
                           focusNode: _focusNode,
-                          suffixIcon: IconButton(
-                            onPressed: () {
-                              widget.weatherService.getCityWeatherData(
-                                  _textEditingController.text.trim());
-                              _textEditingController.clear();
-                              FocusScope.of(context).unfocus();
-                            },
-                            icon: const Icon(Icons.search),
-                          ),
+                          weatherService: widget.weatherService,
                           connectionData: widget.connectionData,
                         ),
                       ),

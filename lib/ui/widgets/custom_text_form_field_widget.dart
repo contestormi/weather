@@ -1,6 +1,7 @@
 import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:weather/services/weather_service.dart';
 import 'package:weather/stores/weather_store.dart';
 
 class CustomTextFormFieldWidget extends StatefulWidget {
@@ -10,7 +11,7 @@ class CustomTextFormFieldWidget extends StatefulWidget {
     required this.valueListenable,
     required this.weatherStore,
     required this.focusNode,
-    required this.suffixIcon,
+    required this.weatherService,
     required this.connectionData,
   }) : super(key: key);
 
@@ -18,7 +19,7 @@ class CustomTextFormFieldWidget extends StatefulWidget {
   final ValueListenable<TextEditingValue> valueListenable;
   final WeatherStore weatherStore;
   final FocusNode focusNode;
-  final Widget? suffixIcon;
+  final WeatherService weatherService;
   final Object? connectionData;
 
   @override
@@ -27,6 +28,7 @@ class CustomTextFormFieldWidget extends StatefulWidget {
 }
 
 class _CustomTextFormFieldWidgetState extends State<CustomTextFormFieldWidget> {
+  final _exp = RegExp(r"[^a-zA-Zа-яёА-ЯЁ ]");
   bool hasConnection(Object? connectionData) {
     if (connectionData == ConnectivityResult.mobile ||
         connectionData == ConnectivityResult.wifi) {
@@ -37,13 +39,12 @@ class _CustomTextFormFieldWidgetState extends State<CustomTextFormFieldWidget> {
   }
 
   String? validateSearch(String textFieldValue, FocusNode focusNode) {
-    RegExp exp = RegExp(r"[^a-zA-Zа-яёА-ЯЁ ]");
     if (!focusNode.hasFocus) {
       return null;
     }
     if (textFieldValue.isEmpty && focusNode.hasFocus) {
       return "The field cannot be empty";
-    } else if (textFieldValue.contains(exp)) {
+    } else if (textFieldValue.contains(_exp)) {
       return "The field cannot contain special characters or numbers";
     }
     return null;
@@ -61,7 +62,24 @@ class _CustomTextFormFieldWidgetState extends State<CustomTextFormFieldWidget> {
               border: OutlineInputBorder(
                 borderRadius: BorderRadius.circular(50.0),
               ),
-              suffixIcon: widget.suffixIcon,
+              suffixIcon: IconButton(
+                color: widget.textEditingController.text.contains(_exp) ||
+                        (widget.textEditingController.text == "" &&
+                            widget.focusNode.hasFocus)
+                    ? Colors.red
+                    : Colors.blue,
+                onPressed: () {
+                  if (widget.textEditingController.text.contains(_exp) ||
+                      widget.textEditingController.text == "") {
+                    return;
+                  }
+                  widget.weatherService.getCityWeatherData(
+                      widget.textEditingController.text.trim());
+                  widget.textEditingController.clear();
+                  FocusScope.of(context).unfocus();
+                },
+                icon: const Icon(Icons.search),
+              ),
               filled: true,
               hintStyle: const TextStyle(
                   color: Colors.black, fontWeight: FontWeight.w400),
