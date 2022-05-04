@@ -28,6 +28,14 @@ flutter pub get
 
 **Шаг 2:**
 
+Запускаем кодогенерацию, для того, чтобы сгенерить модели и стор:
+
+```bash
+flutter packages pub run build_runner build --delete-conflicting-outputs
+```
+
+**Шаг 3:**
+
 Запускаем приложение, находясь в корне проекта:
 
 ```bash
