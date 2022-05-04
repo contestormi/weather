@@ -1,6 +1,8 @@
 import 'package:weather/data/open_weather_api.dart';
 import 'package:weather/stores/weather_store.dart';
 
+/// Сервис, который объединяет в себя запросы с [OpenWeatherAPI] и контроль
+/// состояния [WeatherStore].
 class WeatherService {
   final OpenWeatherAPI openWeatherAPI;
   final WeatherStore weatherStore;

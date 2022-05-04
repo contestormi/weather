@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 
+/// Тема приложения, в которой перечислены все цвета, которые
+/// используются в приложении.
 abstract class AppColors {
   static Color blue = const Color(0xff30A2C5);
   static Color black = const Color(0xff00242F);

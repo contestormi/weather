@@ -2,6 +2,7 @@ import 'package:mobx/mobx.dart';
 import 'package:weather/data/models/weather_forecast_model.dart';
 part 'weather_store.g.dart';
 
+/// Стор, который отвечает за контроль состояния в приложении.
 class WeatherStore = _WeatherStoreBase with _$WeatherStore;
 
 abstract class _WeatherStoreBase with Store {

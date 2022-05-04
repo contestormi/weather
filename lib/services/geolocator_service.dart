@@ -1,5 +1,6 @@
 import 'package:geolocator/geolocator.dart';
 
+/// Сервис, который отвечает за получение геолокации пользователя.
 class GeolocatorService {
   Future<void> checkPermissionAndGetGeoLocation() async {
     bool serviceEnabled;

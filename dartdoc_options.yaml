@@ -1,0 +1,9 @@
+dartdoc:
+  nodoc:
+    [
+      "lib/data/models/*.dart",
+      "lib/ui/widgets/*.dart",
+      "lib/generated_plugin_registrant.dart",
+      "lib/main.dart",
+      "lib/main_screen.dart",
+    ]
