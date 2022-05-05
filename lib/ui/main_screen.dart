@@ -39,7 +39,7 @@ class _MainScreenState extends State<MainScreen> {
                 borderRadius: const BorderRadius.vertical(
                   top: Radius.circular(40),
                 ),
-                maxHeight: 200,
+                maxHeight: 170,
                 minHeight: 60,
                 backdropEnabled: true,
                 panel: PanelWidget(

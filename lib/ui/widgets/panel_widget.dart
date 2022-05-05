@@ -100,7 +100,7 @@ class _ForecastOnTheNextDay extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
                 Container(
-                  width: 70,
+                  width: 60,
                   height: 12,
                   decoration: const BoxDecoration(
                     borderRadius: BorderRadius.all(Radius.circular(5)),
@@ -111,7 +111,7 @@ class _ForecastOnTheNextDay extends StatelessWidget {
                   height: 6,
                 ),
                 Container(
-                  width: 70,
+                  width: 60,
                   height: 75,
                   decoration: const BoxDecoration(
                     borderRadius: BorderRadius.all(Radius.circular(20)),
@@ -129,8 +129,8 @@ class _ForecastOnTheNextDay extends StatelessWidget {
                 height: 6,
               ),
               Container(
-                width: 70,
-                height: 75,
+                width: 60,
+                height: 65,
                 decoration: BoxDecoration(
                     borderRadius: const BorderRadius.all(Radius.circular(20)),
                     color: Colors.white,
