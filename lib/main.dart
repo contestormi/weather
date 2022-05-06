@@ -24,7 +24,7 @@ void main() async {
     if (event == ConnectivityResult.mobile ||
         event == ConnectivityResult.wifi) {
       await _weatherService.getWeatherData(
-          lon: _position.longitude, lat: _position.longitude);
+          lat: _position.latitude, lon: _position.longitude);
     }
   });
 
