@@ -1,5 +1,8 @@
 name: make_builds
-on: [push]
+on:
+  pull_request:
+    branches:
+      - "master"
 jobs:
   build-apk:
     runs-on: ubuntu-latest
@@ -15,8 +18,12 @@ jobs:
       - run: flutter pub get
       - run: flutter test
       - run: flutter build apk
+      - uses: actions/upload-artifact@v1
+        with:
+          name: apk
+          path: build/app/outputs/flutter-apk/app-release.apk
 
-  build-ipa:
+  build-app-archive:
     runs-on: macos-latest
     steps:
       - uses: actions/checkout@v3
@@ -27,3 +34,7 @@ jobs:
       - run: flutter pub get
       - run: flutter test
       - run: flutter build ios --release --no-codesign
+      - uses: actions/upload-artifact@v1
+        with:
+          name: App archive
+          path: /Users/runner/work/weather/weather/build/ios/iphoneos/Runner.app
