@@ -1,0 +1,63 @@
+name: make_builds
+on:
+  pull_request:
+    branches:
+      - "master"
+jobs:
+  lint-and-tests:
+    name: Check code style and run tests
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout source code
+        uses: actions/checkout@v2
+      - name: Install Flutter
+        uses: subosito/flutter-action@v2
+        with:
+          flutter-version: "2.10.4"
+      - name: Get packages in a Flutter project
+        run: flutter pub get
+      - name: Run lint
+        run: flutter analyze
+      - name: Run tests
+        run: flutter test
+
+  build-apk:
+    needs: lint-and-tests
+    name: Builds android APK
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - uses: actions/setup-java@v2
+        with:
+          distribution: "zulu"
+          java-version: "11"
+      - uses: subosito/flutter-action@v2
+        with:
+          flutter-version: "2.10.4"
+      - name: Get packages in a Flutter project
+        run: flutter pub get
+      - name: Build apk
+        run: flutter build apk
+      - uses: actions/upload-artifact@v1
+        with:
+          name: apk
+          path: build/app/outputs/flutter-apk/app-release.apk
+
+  build-app-archive:
+    needs: lint-and-tests
+    name: Builds iOS app archive
+    runs-on: macos-latest
+    steps:
+      - uses: actions/checkout@v3
+      - uses: subosito/flutter-action@v2
+        with:
+          flutter-version: "2.10.4"
+          architecture: x64
+      - name: Get packages in a Flutter project
+        run: flutter pub get
+      - name: Build app archive
+        run: flutter build ios --release --no-codesign
+      - uses: actions/upload-artifact@v1
+        with:
+          name: App archive
+          path: /Users/runner/work/weather/weather/build/ios/iphoneos/Runner.app
