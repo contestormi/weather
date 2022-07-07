@@ -4,7 +4,26 @@ on:
     branches:
       - "master"
 jobs:
+  lint-and-tests:
+    name: Check code style and run tests
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout source code
+        uses: actions/checkout@v2
+      - name: Install Flutter
+        uses: subosito/flutter-action@v2
+        with:
+          flutter-version: "2.10.4"
+      - name: Get packages in a Flutter project
+        run: flutter pub get
+      - name: Run lint
+        run: flutter analyze
+      - name: Run tests
+        run: flutter test
+
   build-apk:
+    needs: lint-and-tests
+    name: Builds android APK
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
@@ -15,15 +34,18 @@ jobs:
       - uses: subosito/flutter-action@v2
         with:
           flutter-version: "2.10.4"
-      - run: flutter pub get
-      - run: flutter test
-      - run: flutter build apk
+      - name: Get packages in a Flutter project
+        run: flutter pub get
+      - name: Build apk
+        run: flutter build apk
       - uses: actions/upload-artifact@v1
         with:
           name: apk
           path: build/app/outputs/flutter-apk/app-release.apk
 
   build-app-archive:
+    needs: lint-and-tests
+    name: Builds iOS app archive
     runs-on: macos-latest
     steps:
       - uses: actions/checkout@v3
@@ -31,9 +53,10 @@ jobs:
         with:
           flutter-version: "2.10.4"
           architecture: x64
-      - run: flutter pub get
-      - run: flutter test
-      - run: flutter build ios --release --no-codesign
+      - name: Get packages in a Flutter project
+        run: flutter pub get
+      - name: Build app archive
+        run: flutter build ios --release --no-codesign
       - uses: actions/upload-artifact@v1
         with:
           name: App archive
