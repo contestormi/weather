@@ -1,63 +1,87 @@
-name: make_builds
+name: deploy_builds
 on:
-  pull_request:
-    branches:
-      - "master"
+  [push]
+  # pull_request:
+  #   branches:
+  #     - "master"
 jobs:
-  lint-and-tests:
-    name: Check code style and run tests
-    runs-on: ubuntu-latest
-    steps:
-      - name: Checkout source code
-        uses: actions/checkout@v2
-      - name: Install Flutter
-        uses: subosito/flutter-action@v2
-        with:
-          flutter-version: "2.10.4"
-      - name: Get packages in a Flutter project
-        run: flutter pub get
-      - name: Run lint
-        run: flutter analyze
-      - name: Run tests
-        run: flutter test
+  # lint-and-tests:
+  #   name: Check code style and run tests
+  #   runs-on: ubuntu-latest
+  #   steps:
+  #     - name: Checkout source code
+  #       uses: actions/checkout@v2
+  #     - name: Install Flutter
+  #       uses: subosito/flutter-action@v2
+  #       with:
+  #         flutter-version: "2.10.4"
+  #     - name: Get packages in a Flutter project
+  #       run: flutter pub get
+  #     - name: Run lint
+  #       run: flutter analyze
+  #     - name: Run tests
+  #       run: flutter test
 
   build-apk:
-    needs: lint-and-tests
+    # needs: lint-and-tests
     name: Builds android APK
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v3
-      - uses: actions/setup-java@v2
+      - name: Checkout
+        uses: actions/checkout@v3 # checks-out repository
+      - name: Installing Java
+        uses: actions/setup-java@v2 # installing java
         with:
           distribution: "zulu"
           java-version: "11"
-      - uses: subosito/flutter-action@v2
+      - name: Installing Flutter
+        uses: subosito/flutter-action@v2 # installing flutter with version 2.10.4
         with:
           flutter-version: "2.10.4"
       - name: Get packages in a Flutter project
-        run: flutter pub get
+        run: flutter pub get # getting packages
       - name: Build apk
-        run: flutter build apk
-      - uses: actions/upload-artifact@v1
-        with:
-          name: apk
-          path: build/app/outputs/flutter-apk/app-release.apk
+        run: flutter build apk # building apk
 
-  build-app-archive:
-    needs: lint-and-tests
-    name: Builds iOS app archive
-    runs-on: macos-latest
-    steps:
-      - uses: actions/checkout@v3
-      - uses: subosito/flutter-action@v2
+      # Uncomment this section if upload artifacts to github actions workflow needed
+      # - uses: actions/upload-artifact@v1
+      #   with:
+      #     name: apk
+      #     path: build/app/outputs/flutter-apk/app-release.apk
+
+      - name: Checkout
+        uses: actions/checkout@v2
         with:
-          flutter-version: "2.10.4"
-          architecture: x64
-      - name: Get packages in a Flutter project
-        run: flutter pub get
-      - name: Build app archive
-        run: flutter build ios --release --no-codesign
-      - uses: actions/upload-artifact@v1
+          clean: false # flag is needed in order not to delete the compiled apk
+      - name: Installing Ruby
+        uses: ruby/setup-ruby@v1 # installing ruby for fastlane
         with:
-          name: App archive
-          path: /Users/runner/work/weather/weather/build/ios/iphoneos/Runner.app
+          ruby-version: "2.7.2"
+      - name: Running fastlane (uploading apk to Firebase App Distribution)
+        env:
+          APP: ${{ secrets.APP }}
+          FIREBASE_CLI_TOKEN: ${{ secrets.FIREBASE_CLI_TOKEN }}
+          TESTERS: ${{ secrets.TESTERS }}
+        uses: maierj/fastlane-action@v2.2.0 # runs android distribution lane inside android folder
+        with:
+          lane: android distribute
+          subdirectory: android
+
+  # build-app-archive:
+  #   needs: lint-and-tests
+  #   name: Builds iOS app archive
+  #   runs-on: macos-latest
+  #   steps:
+  #     - uses: actions/checkout@v3
+  #     - uses: subosito/flutter-action@v2
+  #       with:
+  #         flutter-version: "2.10.4"
+  #         architecture: x64
+  #     - name: Get packages in a Flutter project
+  #       run: flutter pub get
+  #     - name: Build app archive
+  #       run: flutter build ios --release --no-codesign
+  #     - uses: actions/upload-artifact@v1
+  #       with:
+  #         name: App archive
+  #         path: /Users/runner/work/weather/weather/build/ios/iphoneos/Runner.app
